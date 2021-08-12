@@ -15,7 +15,7 @@ export default function Home({ weatherData }) {
       <span>NX-Weather</span>
       <div className={styles.contentContainer}>
         <SearchBar />
-        <WeatherCard city={weatherData.city} weatherInfo={weatherData.weatherInfo} />
+        <WeatherCard weatherInfo={weatherData} />
       </div>
     </div>
   )
@@ -30,16 +30,14 @@ export const getStaticProps: GetStaticProps = async() => {
 
   const weatherData = {
     city: 'Diadema',
-    weatherInfo: {
-      description: res.data.weather.map(data=>{return data.description}).pop(),
-      temperature: res.data.main.temp,
-      minTemperature: res.data.main.temp_min,
-      maxTemperature: res.data.main.temp_max,
-      humidity: res.data.main.humidity,
+    description: res.data.weather.map(data=>{return data.description}).pop(),
+    temperature: res.data.main.temp,
+    minTemperature: res.data.main.temp_min,
+    maxTemperature: res.data.main.temp_max,
+    humidity: res.data.main.humidity,
     }
     
 
-  } 
 
 
 
@@ -48,5 +46,4 @@ export const getStaticProps: GetStaticProps = async() => {
       weatherData
     }
   }
-
 }
