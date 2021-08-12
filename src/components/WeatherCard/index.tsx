@@ -1,7 +1,19 @@
 
 import styles from './styles.module.scss'
 
-export function WeatherCard() {
+type WeatherCardProps = {
+  city: string,
+  weatherInfo: {
+    description: string,
+    temperature: number,
+    minTemperature: number,
+    maxTemperature: number,
+    humidity: number,
+  }
+}
+
+
+export function WeatherCard({weatherInfo}: WeatherCardProps) {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardContent}>
