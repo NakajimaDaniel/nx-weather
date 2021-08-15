@@ -5,13 +5,15 @@ import { useCombobox } from 'downshift'
 import {useVirtual} from 'react-virtual'
 
 import { useCallback, useRef, useState } from 'react'
+import { useRouter } from 'next/dist/client/router';
 
 
 
-const dataListMap = Object.fromEntries(
-  Object.entries(cityDataList)
-  .map(([ val ]) => { return [val.name]})
-);
+// const dataListMap = Object.fromEntries(
+//   Object.entries(cityDataList)
+//   .map(([ val ]) => { return [val.name]})
+// );
+
 const data = cityDataList;
 
 const cityList = data.map(val=>{return val.name})
@@ -20,20 +22,19 @@ const cityList = data.map(val=>{return val.name})
 
 
 
-function getItems(search) {
-  return cityList.filter(n => n.toLowerCase().includes(search))
-}
+
 
 export function SearchBar() {
 
-    const [inputValue, setInputValue] = useState('')
-    const items = getItems(inputValue)
-    const listRef = useRef()
+    const router = useRouter();
+    const [inputValue, setInputValue] = useState('');
+    const items = getItems(inputValue);
+    const listRef = useRef();
     const rowVirtualizer = useVirtual({
-      size: 10,
+      size: 5,
       parentRef: listRef,
-      estimateSize: useCallback(() => 30, []),
-      overscan: 2,
+      estimateSize: useCallback(() => 5, []),
+      overscan: 1,
     })
     const {
       getInputProps,
@@ -53,11 +54,33 @@ export function SearchBar() {
       onHighlightedIndexChange: ({ highlightedIndex }) =>
         rowVirtualizer.scrollToIndex(highlightedIndex),
     })
+
+    const handleInput = (e) => {
+
+      if(e.key === 'Enter') {
+
+        const datafilter = data.filter((val)=> { return val.name == inputValue})
+
+        if(datafilter.length !== 0) {
+          router.push(`city/${datafilter[0].id}`)
+        }
+
+        
+      }
+    }
+
+    function getItems(search) {
+      return cityList.filter(n => n.toLowerCase().includes(search))
+    }
+
+    
+
+
     return (
       <div className={styles.searchContainer}>
 
         <div {...getComboboxProps()}>
-          <input {...getInputProps({ type: 'text' })} />
+          <input {...getInputProps({ type: 'text' })}  onKeyPress={handleInput} placeholder="Search ..." />
         </div>
 
         <ul
