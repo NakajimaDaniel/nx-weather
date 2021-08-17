@@ -10,3 +10,40 @@
 
 
 }
+
+
+.tomorrowWeather {
+  background: #FFFFFF;
+  width: 40rem;
+  border-radius: 1rem;
+
+  >div{
+    padding: 1rem;
+    span {
+      font-weight: 400;
+      color: #393939;
+      font-size: 20px;
+    }
+
+    h1 {
+      color: #393939;
+      padding-top: 0.9rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+}
+
+
+.tomorrowWeatherData {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    padding-bottom: 0.3rem;
+
+    >span {
+      font-size: 18px;
+    }
+  }
+}

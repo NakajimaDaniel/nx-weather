@@ -61,10 +61,25 @@ export default function CityWeather({weatherData, weatherForecastData}: cityWeat
       <SearchBar />
       <WeatherCard weatherInfo={weatherData} />
 
-      <div>
+      <div className={styles.tomorrowWeather}>
+        <div>
+          <span>Weather for tomorrow</span>
+          <h1>{weatherForecastData?.list[0][0].weather?.temp}ºC</h1>
+        </div>
 
+        <div className={styles.tomorrowWeatherData}>
+          <div>
+            <span>{weatherForecastData?.list[0][0].weather.minTemp}/{weatherForecastData?.list[0][0].weather.maxTemp}°C</span>
+          </div>
+          <div>
+            <span>{weatherForecastData?.list[0][0].weather.pressure}hPa</span>
+          </div>
+          <div>
+            <span>{weatherForecastData?.list[0][0].weather.humidity}%</span>
+          </div>
+        </div>
       </div>
-
+      
     </div>
   )
 }
