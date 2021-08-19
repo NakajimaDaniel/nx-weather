@@ -32,6 +32,10 @@ interface weatherForecastUnit {
   weatherMain: string,
   weatherDescription: string,
   icon: string,
+  windSpeed: number,
+  windGust: number,
+  windDeg: number,
+  PrecipitationProp: number,
 }
 
 export default function CityWeather({weatherForecastData,weatherDataCurrent }:cityWeatherProps) {
@@ -57,16 +61,37 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
           <h1>{weatherForecastData[0].tempDay}ºC</h1>
         </div>
 
-        <div className={styles.tomorrowWeatherData}>
-          <div>
-            <span>{weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
+        <div className={styles.tomorrowWeatherDataWrapper}>
+          <div className={styles.tomorrowWeatherData}>
+            <div>
+              <span>{weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
+            </div>
+            <div>
+              <span>{weatherForecastData[0].pressure} hPa</span>
+            </div>
+            <div>
+              <span>{weatherForecastData[0].humidity}%</span>
+            </div>
           </div>
-          <div>
-            <span>{weatherForecastData[0].pressure}hPa</span>
+
+          <div className={styles.tomorrowWeatherData}>
+            <div>
+              <span>{weatherForecastData[0].windSpeed} metre/sec</span>
+            </div>
+            <div>
+              <span>{weatherForecastData[0].windGust} metre/sec</span>
+            </div>
+            <div>
+              <span>{weatherForecastData[0].windDeg}º</span>
+            </div>
           </div>
-          <div>
-            <span>{weatherForecastData[0].humidity}%</span>
+
+          <div className={styles.tomorrowWeatherData}>
+            <div>
+              <span>{weatherForecastData[0].PrecipitationProp} %</span>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -79,7 +104,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
           {weatherForecastData.slice(0,5).map(data=> {
             return (
             <div className={styles.forecastUnit}>
-              <p>{data.dt}</p>
+              <p>{new Date(data.dt * 1000).toLocaleString()}</p>
               <span>{data.tempDay}°C</span>
               <span>{data.tempMin}/{data.tempMax}°C</span>
             </div>
@@ -134,6 +159,13 @@ export const getServerSideProps = async ({params}) => {
         weatherMain: data.weather[0].main,
         weatherDescription: data.weather[0].description,
         icon: data.weather[0].icon,
+
+        windSpeed: data.wind_speed,
+        windGust: data.wind_gust,
+        windDeg: data.wind_deg,
+        PrecipitationProp: data.pop,
+        // PrecipitationVol: data.rain,
+        
       }
     })
 
