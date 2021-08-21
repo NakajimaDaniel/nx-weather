@@ -7,3 +7,38 @@
 body {
   font: 400 1rem "inter", sans-serif;
 }
+
+.aa-Autocomplete {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.aa-Input {
+  width: 20rem;
+  height: 2rem;
+  padding-left: 1rem;
+  margin-top: 2rem;
+}
+
+.aa-Panel {
+  background: white;
+  margin: 0.5rem;
+  border-radius: 5px;
+}
+
+.aa-Source {
+  padding: 0.5rem;
+  z-index: 10;
+  // position: absolute;
+  // left: 34.4rem;
+  background: white;
+  ul {
+    list-style-type: none;
+    width: 19rem;
+    li{
+      padding: 0.2rem;
+      cursor: pointer;
+    }
+  }
+}
