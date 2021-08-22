@@ -6,6 +6,25 @@ import { WeatherCard } from '../../components/WeatherCard';
 import styles from './cityWeather.module.scss';
 
 
+	
+
+import React, { createElement } from 'react';
+import { autocomplete,getAlgoliaResults } from '@algolia/autocomplete-js';
+import algoliasearch from 'algoliasearch';
+
+import { CityItem } from '../../components/CityItem';
+
+	
+
+
+
+
+const apiid = '602BIBAIH0';
+const apikeyd = '47f26875cbaa4eaaef4a0f989fbc93ef'
+
+const searchClient = algoliasearch(apiid, apikeyd);
+
+
 
 interface cityWeatherProps {
   weatherDataCurrent: {
@@ -49,11 +68,42 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
     )
   }
 
+  
+
 
   return (
     <div className={styles.cityWeatherContainer}>
-      <SearchBar />
-      <WeatherCard weatherInfo={weatherDataCurrent} />
+      	
+
+      {/* <SearchBar 
+            openOnFocus={false}
+            getSources={({ query }) => [
+              {
+                sourceId: 'name',
+                getItems() {
+                  return getAlgoliaResults({
+                    searchClient,
+                    queries: [
+                      {
+                        indexName: 'city_list',
+                        query,
+                      },
+                    ],
+                  });
+                },
+                templates: {
+                  item({ item, components }) {
+                    return <CityItem hit={item} components={components} />;
+                  },
+                },
+
+              },
+            ]}
+          /> */}
+
+          <SearchBar /> 
+
+      <WeatherCard  weatherInfo={weatherDataCurrent} />
 
       <div className={styles.tomorrowWeather}>
         <div>
@@ -104,7 +154,12 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
           {weatherForecastData.slice(0,5).map(data=> {
             return (
             <div className={styles.forecastUnit}>
-              <p>{new Date(data.dt * 1000).toLocaleString()}</p>
+              <p>{new Date(data.dt * 1000).toLocaleString('pt-br', {
+                day: '2-digit',
+                month: '2-digit',
+                year: '2-digit'
+              })}</p>
+              <img src={`http://openweathermap.org/img/wn/${data.icon}@2x.png`} /> 
               <span>{data.tempDay}°C</span>
               <span>{data.tempMin}/{data.tempMax}°C</span>
             </div>
