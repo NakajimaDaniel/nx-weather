@@ -219,7 +219,7 @@ export function SearchBar() {
               getItemUrl({ item }) {
                 return item.url;
               },
-              onSelect:(item)=>{router.push(`./${item.item.id}`)},
+              onSelect:(item)=>{router.push(`/city/${item.item.id}`)},
             },
           ];
         },
