@@ -36,6 +36,8 @@ interface cityWeatherProps {
     humidity: number,
     dt: number,
     timezone: number,
+    icon: string,
+    country: string,
   },
 
   weatherForecastData: Array<weatherForecastUnit>
@@ -91,7 +93,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
       	
       <SearchBar /> 
 
-      <WeatherCard  weatherInfo={weatherDataCurrent} />
+      <WeatherCard  weatherInfo={weatherDataCurrent} isNight={isNight} />
 
       <div className={styles.tomorrowWeather}>
         <div>
@@ -183,6 +185,8 @@ export const getServerSideProps = async ({params}) => {
     humidity: res.data.main.humidity,
     dt: res.data.dt,
     timezone: res.data.timezone,
+    icon: res.data.weather.map(data => {return data.icon}).pop(),
+    country: res.data.sys.country,
   }
 
   const res2 = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${process.env.OPEN_WEATHER_API_KEY}&units=metric `)
