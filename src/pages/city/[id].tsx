@@ -8,11 +8,11 @@ import styles from './cityWeather.module.scss';
 
 	
 
-import React, { createElement } from 'react';
+import React, { createElement, useEffect, useState } from 'react';
 import { autocomplete,getAlgoliaResults } from '@algolia/autocomplete-js';
 import algoliasearch from 'algoliasearch';
 
-import { CityItem } from '../../components/CityItem';
+
 
 	
 
@@ -34,6 +34,8 @@ interface cityWeatherProps {
     minTemperature: number,
     maxTemperature: number,
     humidity: number,
+    dt: number,
+    timezone: number,
   },
 
   weatherForecastData: Array<weatherForecastUnit>
@@ -61,6 +63,20 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
 
   const router = useRouter();
 
+  const UTCHour = new Date((weatherDataCurrent.dt * 1000) + (weatherDataCurrent.timezone * 1000)).getUTCHours();
+
+  const [isNight, setIsNight] = useState(false)
+
+
+
+  useEffect(() => {
+    if(UTCHour >= 18 || UTCHour>= 0 && UTCHour <= 5) {
+      setIsNight(true);
+    } else {
+      setIsNight(false);
+    }
+  }, [UTCHour])
+
 
   if(router.isFallback) {
     return (
@@ -68,40 +84,12 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
     )
   }
 
-  
 
 
   return (
-    <div className={styles.cityWeatherContainer}>
+    <div className={isNight?  styles.cityWeatherContainer : styles.cityWeatherContainerDay}>
       	
-
-      {/* <SearchBar 
-            openOnFocus={false}
-            getSources={({ query }) => [
-              {
-                sourceId: 'name',
-                getItems() {
-                  return getAlgoliaResults({
-                    searchClient,
-                    queries: [
-                      {
-                        indexName: 'city_list',
-                        query,
-                      },
-                    ],
-                  });
-                },
-                templates: {
-                  item({ item, components }) {
-                    return <CityItem hit={item} components={components} />;
-                  },
-                },
-
-              },
-            ]}
-          /> */}
-
-          <SearchBar /> 
+      <SearchBar /> 
 
       <WeatherCard  weatherInfo={weatherDataCurrent} />
 
@@ -114,22 +102,22 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
         <div className={styles.tomorrowWeatherDataWrapper}>
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span>{weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
+              <span>min/max: {weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
             </div>
             <div>
-              <span>{weatherForecastData[0].pressure} hPa</span>
+              <span>pressure: {weatherForecastData[0].pressure} hPa</span>
             </div>
             <div>
-              <span>{weatherForecastData[0].humidity}%</span>
+              <span>humidity: {weatherForecastData[0].humidity}%</span>
             </div>
           </div>
 
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span>{weatherForecastData[0].windSpeed} metre/sec</span>
+              <span>wind speed: {weatherForecastData[0].windSpeed} metre/sec</span>
             </div>
             <div>
-              <span>{weatherForecastData[0].windGust} metre/sec</span>
+              <span>gust: {weatherForecastData[0].windGust} metre/sec</span>
             </div>
             <div>
               <span>{weatherForecastData[0].windDeg}º</span>
@@ -138,7 +126,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
 
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span>{weatherForecastData[0].PrecipitationProp} %</span>
+              <span>Precipitation: {weatherForecastData[0].PrecipitationProp} %</span>
             </div>
           </div>
 
@@ -193,7 +181,8 @@ export const getServerSideProps = async ({params}) => {
     minTemperature: res.data.main.temp_min,
     maxTemperature: res.data.main.temp_max,
     humidity: res.data.main.humidity,
-    
+    dt: res.data.dt,
+    timezone: res.data.timezone,
   }
 
   const res2 = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${process.env.OPEN_WEATHER_API_KEY}&units=metric `)
