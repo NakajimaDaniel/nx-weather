@@ -11,7 +11,7 @@ body {
 .aa-Autocomplete {
   display: flex;
   flex-direction:column;
-  align-items: center;
+  align-items: left;
 }
 
 .aa-Input {
@@ -25,17 +25,25 @@ body {
   background: white;
   margin: 0.5rem;
   border-radius: 5px;
+  position: relative;
+  display: inline-block;
 }
 
 .aa-Source {
   padding: 0.5rem;
-  z-index: 10;
-  // position: absolute;
   // left: 34.4rem;
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 20rem;
+
   background: white;
   ul {
     list-style-type: none;
-    width: 19rem;
+    // width: 19rem;
+
     li{
       padding: 0.2rem;
       cursor: pointer;
