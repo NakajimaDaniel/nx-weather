@@ -14,6 +14,7 @@ import algoliasearch from 'algoliasearch';
 
 
 
+
 	
 
 
@@ -92,7 +93,6 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
     <div className={isNight?  styles.cityWeatherContainer : styles.cityWeatherContainerDay}>
       	
       <SearchBar /> 
-
       <WeatherCard  weatherInfo={weatherDataCurrent} isNight={isNight} />
 
       <div className={styles.tomorrowWeather}>
@@ -104,22 +104,22 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
         <div className={styles.tomorrowWeatherDataWrapper}>
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span>min/max: {weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
+              <span><i className="wi wi-thermometer"></i> {weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
             </div>
             <div>
-              <span>pressure: {weatherForecastData[0].pressure} hPa</span>
+              <span><i className="wi wi-barometer"></i> {weatherForecastData[0].pressure} hPa</span>
             </div>
             <div>
-              <span>humidity: {weatherForecastData[0].humidity}%</span>
+              <span><i className="wi wi-humidity"></i> {weatherForecastData[0].humidity}%</span>
             </div>
           </div>
 
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span>wind speed: {weatherForecastData[0].windSpeed} metre/sec</span>
+              <span><i className="wi wi-windy"></i> {weatherForecastData[0].windSpeed} metre/sec</span>
             </div>
             <div>
-              <span>gust: {weatherForecastData[0].windGust} metre/sec</span>
+              <span><i className="wi wi-dust"></i> {weatherForecastData[0].windGust} metre/sec</span>
             </div>
             <div>
               <span>{weatherForecastData[0].windDeg}º</span>
@@ -128,7 +128,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
 
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span>Precipitation: {weatherForecastData[0].PrecipitationProp} %</span>
+              <span><i className="wi wi-raindrops"></i> {weatherForecastData[0].PrecipitationProp} %</span>
             </div>
           </div>
 

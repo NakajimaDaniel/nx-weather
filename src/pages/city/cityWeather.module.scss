@@ -52,13 +52,18 @@
 .tomorrowWeatherData {
   display: flex;
   flex-direction: column;
-  padding-right: 2rem;
+  padding-right: 5rem;
 
   div {
     padding-bottom: 0.3rem;
-
+    display: flex;
+    align-items: center;
+    justify-content: left;
     >span {
       font-size: 18px;
+      i {
+        padding-right: 0.2rem
+      }
     }
   }
 }
