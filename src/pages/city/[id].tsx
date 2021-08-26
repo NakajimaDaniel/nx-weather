@@ -98,28 +98,28 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
       <div className={styles.tomorrowWeather}>
         <div>
           <span>Weather for tomorrow</span>
-          <h1>{weatherForecastData[0].tempDay}ºC</h1>
+          <h1>{Math.round(weatherForecastData[0].tempDay * 10) / 10}ºC</h1>
         </div>
 
         <div className={styles.tomorrowWeatherDataWrapper}>
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span><i className="wi wi-thermometer"></i> {weatherForecastData[0].tempMin}/{weatherForecastData[0].tempMax}°C</span>
+              <span><i className="wi wi-thermometer"></i> {Math.round(weatherForecastData[0].tempMin * 10) / 10}/{Math.round(weatherForecastData[0].tempMax * 10) / 10}°C</span>
             </div>
             <div>
-              <span><i className="wi wi-barometer"></i> {weatherForecastData[0].pressure} hPa</span>
+              <span><i className="wi wi-barometer"></i> {Math.round(weatherForecastData[0].pressure * 10) / 10} hPa</span>
             </div>
             <div>
-              <span><i className="wi wi-humidity"></i> {weatherForecastData[0].humidity}%</span>
+              <span><i className="wi wi-humidity"></i> {Math.round(weatherForecastData[0].humidity * 10) / 10}%</span>
             </div>
           </div>
 
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span><i className="wi wi-windy"></i> {weatherForecastData[0].windSpeed} metre/sec</span>
+              <span><i className="wi wi-windy"></i> {Math.round(weatherForecastData[0].windSpeed * 10) / 10} metre/sec</span>
             </div>
             <div>
-              <span><i className="wi wi-dust"></i> {weatherForecastData[0].windGust} metre/sec</span>
+              <span><i className="wi wi-dust"></i> {Math.round(weatherForecastData[0].windGust * 10) / 10} metre/sec</span>
             </div>
             <div>
               <span>{weatherForecastData[0].windDeg}º</span>
@@ -128,7 +128,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
 
           <div className={styles.tomorrowWeatherData}>
             <div>
-              <span><i className="wi wi-raindrops"></i> {weatherForecastData[0].PrecipitationProp} %</span>
+              <span><i className="wi wi-raindrops"></i> {Math.round(weatherForecastData[0].PrecipitationProp * 10) / 10} %</span>
             </div>
           </div>
 
