@@ -17,8 +17,7 @@ body {
 .aa-Input {
   width: 20rem;
   height: 2rem;
-  padding-left: 1rem;
-  margin-top: 2rem;
+  padding-left: 2rem;
 }
 
 .aa-Panel {
@@ -49,4 +48,29 @@ body {
       cursor: pointer;
     }
   }
+}
+
+
+.search-input-container {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+
+  padding: 1rem;
+
+  img {
+    position: absolute;
+    padding-left: 0.4rem;
+  }
+
+  >div {
+
+    position: absolute;
+    padding-left: 0.4rem;
+
+  }
+
 }

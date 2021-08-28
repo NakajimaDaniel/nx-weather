@@ -4,7 +4,7 @@ import { createAutocomplete } from '@algolia/autocomplete-core';
 import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
-
+import Loader from "react-loader-spinner";
 
 const searchClient = algoliasearch(
   '602BIBAIH0',
@@ -25,7 +25,7 @@ export function SearchBar() {
         onStateChange({ state }) {
           setAutocompleteState(state);
         },
-        getSources({ setQuery, refresh, query }) {
+        getSources({ setQuery, refresh, query, state }) {
           return [
             {
               sourceId: 'name',
@@ -51,12 +51,14 @@ export function SearchBar() {
               getItemUrl({ item }) {
                 return item.url;
               },
-              onSelect: ({item}) => {
+              onSelect: (item) => {
                 setQuery(item.item.name); 
                 setItemSelectedId(item.item.id);
                 setItemSelectedName(item.item.name);
+
               },
               
+
             },
         
           ];
@@ -66,6 +68,7 @@ export function SearchBar() {
     []
   );
 
+      console.log(autocompleteState)
 
   function handleSearchInputKeyPress(e) {
     if(e.key === 'Enter') {
@@ -80,7 +83,19 @@ export function SearchBar() {
 
   return (
     <div className="aa-Autocomplete" {...autocomplete.getRootProps({})}>
-      <input className="aa-Input" {...autocomplete.getInputProps({})} placeholder="Search ..." onKeyPress={handleSearchInputKeyPress} />
+      <div className="search-input-container">
+        <input className="aa-Input" {...autocomplete.getInputProps({})} placeholder="Search ..." onKeyPress={handleSearchInputKeyPress} />
+        {autocompleteState.status == 'idle' ? (
+          <img src="/assets/searchIcon.svg"  /> 
+        ) : (
+          <Loader
+          type="TailSpin"
+          color="#00BFFF"
+          height={20}
+          width={20}
+          />
+        )}
+      </div>
       <div className="aa-Panel" {...autocomplete.getPanelProps({})}>
         {autocompleteState.isOpen &&
           autocompleteState.collections.map((collection, index) => {
