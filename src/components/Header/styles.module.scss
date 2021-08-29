@@ -1,0 +1,18 @@
+
+
+
+.HeaderContainer {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    position: absolute;
+    left: 24%;
+    color: white;
+    font-size: 18px;
+  }
+}
