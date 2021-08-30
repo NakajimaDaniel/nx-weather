@@ -1,19 +1,22 @@
 .cardContainerDay {
-  width: 30rem;
-  height: 10rem;
+  // max-width: 30rem;
+  // max-height: 10rem;
   background: linear-gradient(0deg, rgba(249, 218, 218, 0.2) 4.37%, rgba(0, 0, 0, 0) 83.16%), #259BC0;;
   border-radius: 2rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  margin-left: 0.5rem;
 }
 
 .cardContainer {
-  width: 30rem;
-  height: 11rem;
+  // width: 30rem;
+  // height: 11rem;
   background: linear-gradient(0deg, rgba(249, 218, 218, 0.2) 4.37%, rgba(0, 0, 0, 0) 83.16%), #2C1068;
   border-radius: 2rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 
@@ -28,6 +31,7 @@
   padding-left: 30px;
   padding-bottom: 15px;
   padding-top: 15px;
+  padding-right: 5rem;
   display: flex;
   flex-direction:column;
 
@@ -65,5 +69,12 @@
 
   >span {
     color: white;
+  }
+}
+
+
+@media screen and (max-width: 850px) {
+  .cardContentMainInfo {
+    padding-right: 2rem;
   }
 }

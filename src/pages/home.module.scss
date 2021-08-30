@@ -29,3 +29,12 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
+
+
+@media screen and (max-width: 680px) {
+  .contentContainer {
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
