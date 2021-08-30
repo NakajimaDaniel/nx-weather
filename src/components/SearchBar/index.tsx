@@ -68,8 +68,6 @@ export function SearchBar() {
     []
   );
 
-      console.log(autocompleteState)
-
   function handleSearchInputKeyPress(e) {
     if(e.key === 'Enter') {
       if(itemSelectedName == e.target.value) {
@@ -81,19 +79,21 @@ export function SearchBar() {
     }
   }
 
+
   return (
+
     <div className="aa-Autocomplete" {...autocomplete.getRootProps({})}>
       <div className="search-input-container">
         <input className="aa-Input" {...autocomplete.getInputProps({})} placeholder="Search ..." onKeyPress={handleSearchInputKeyPress} />
-        {autocompleteState.status == 'idle' ? (
-          <img src="/assets/searchIcon.svg"  /> 
-        ) : (
+        {autocompleteState.status == 'loading' ? (
           <Loader
-          type="TailSpin"
-          color="#00BFFF"
-          height={20}
-          width={20}
+            type="TailSpin"
+            color="#00BFFF"
+            height={20}
+            width={20}
           />
+        ) : (
+          <img src="/assets/searchIcon.svg"  /> 
         )}
       </div>
       <div className="aa-Panel" {...autocomplete.getPanelProps({})}>
