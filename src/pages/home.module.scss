@@ -1,0 +1,31 @@
+
+
+.mainContainer {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(0deg, rgba(239, 146, 176, 0.4) 16.5%, rgba(239, 146, 176, 0) 75.59%), linear-gradient(360deg, rgba(245, 230, 230, 0.2) 33.79%, rgba(202, 202, 202, 0) 87.16%), #3C0F85;;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+
+  >span {
+    color: white;
+  }
+
+}
+
+.mainContainerDay{
+  display: flex;
+  align-items: center;
+  background: linear-gradient(0deg, rgba(10, 150, 228, 0.2), rgba(10, 150, 228, 0.2)), linear-gradient(0deg, rgba(239, 146, 176, 0.4) 16.5%, rgba(239, 146, 176, 0) 75.59%);
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+
+.contentContainer {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
