@@ -90,10 +90,10 @@
 
 .forecastContainer {
   background: #ffff;
-  width: 45rem;
+  max-width: 45rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
-
+  width: 100%;
 
   >p {
     padding-left: 1.2rem;
@@ -133,6 +133,15 @@
     max-width: 40rem
   }
 
+  .forecastWrapper {
+    overflow: scroll;
+    padding-left: 5rem;
+  }
+
+  .forecastContainer {
+    max-width: 40rem;
+  }
+
 }
 
 @media screen and (max-width: 610px) {
@@ -143,13 +152,29 @@
 
   .tomorrowWeatherData {
     grid-template-columns: repeat(2, 1fr);
-
   }
+
+  .forecastWrapper {
+    padding-left: 13rem;
+  }
+
+  .forecastContainer {
+    max-width: 30rem;
+  }
+
 }
 
 
 @media screen and (max-width: 470px) {
   .tomorrowWeather {
+    max-width: 27rem;
+  }
+
+  .forecastWrapper {
+    padding-left: 17rem;
+  }
+
+  .forecastContainer {
     max-width: 27rem;
   }
 }
@@ -175,4 +200,14 @@
     }
 
   }
+
+  .forecastWrapper {
+    padding-left: 20rem;
+  }
+
+  .forecastContainer {
+    max-width: 24rem;
+  }
+
+
 }
