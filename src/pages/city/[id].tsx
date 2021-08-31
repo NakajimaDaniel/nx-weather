@@ -1,7 +1,8 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
-import { SearchBar } from '../../components/SearchBar';
+
+import { Header } from '../../components/Header';
 import { WeatherCard } from '../../components/WeatherCard';
 import styles from './cityWeather.module.scss';
 
@@ -68,8 +69,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
 
   const UTCHour = new Date((weatherDataCurrent.dt * 1000) + (weatherDataCurrent.timezone * 1000)).getUTCHours();
 
-  const [isNight, setIsNight] = useState(false)
-
+  const [isNight, setIsNight] = useState(false);
 
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
   return (
     <div className={isNight?  styles.cityWeatherContainer : styles.cityWeatherContainerDay}>
       	
-      <SearchBar /> 
+      <Header /> 
       <WeatherCard  weatherInfo={weatherDataCurrent} isNight={isNight} />
 
       <div className={styles.tomorrowWeather}>
@@ -112,9 +112,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
             <div>
               <span><i className="wi wi-humidity"></i> {Math.round(weatherForecastData[0].humidity * 10) / 10}%</span>
             </div>
-          </div>
 
-          <div className={styles.tomorrowWeatherData}>
             <div>
               <span><i className="wi wi-windy"></i> {Math.round(weatherForecastData[0].windSpeed * 10) / 10} metre/sec</span>
             </div>
@@ -124,13 +122,13 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
             <div>
               <span>{weatherForecastData[0].windDeg}º</span>
             </div>
-          </div>
 
-          <div className={styles.tomorrowWeatherData}>
             <div>
               <span><i className="wi wi-raindrops"></i> {Math.round(weatherForecastData[0].PrecipitationProp * 10) / 10} %</span>
             </div>
+
           </div>
+
 
         </div>
       </div>
@@ -144,7 +142,8 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
           {weatherForecastData.slice(0,5).map(data=> {
             return (
             <div className={styles.forecastUnit}>
-              <p>{new Date(data.dt * 1000).toLocaleString('pt-br', {
+              <p>{new Date(data.dt * 1000).toLocaleString('en', {weekday: 'long'})}</p>
+              <p>{new Date(data.dt * 1000).toLocaleString('default', {
                 day: '2-digit',
                 month: '2-digit',
                 year: '2-digit'
