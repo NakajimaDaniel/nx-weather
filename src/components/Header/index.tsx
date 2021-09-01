@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 export function Header() {
   return (
     <div className={styles.HeaderContainer}>
-      <span>NX-Weather</span>
+      <img src="/assets/nx-weather-title.png"  />
       <SearchBar />
     </div>
   )
