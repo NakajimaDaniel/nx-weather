@@ -26,7 +26,7 @@ export default function Home({ weatherData }) {
 
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={isNight?  styles.mainContainer : styles.mainContainerDay}>
       <Header /> 
         
       <div className={styles.contentContainer}>
