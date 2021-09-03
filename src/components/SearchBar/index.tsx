@@ -7,15 +7,24 @@ import { useRouter } from 'next/dist/client/router';
 import Loader from "react-loader-spinner";
 
 const searchClient = algoliasearch(
-  '602BIBAIH0',
-  '47f26875cbaa4eaaef4a0f989fbc93ef'
+  'L4998G5UXB',
+  'c1271a9298769d286887fbad97fa030d'
 );
+
+
+type itemProps = {
+  item: {
+    name: string,
+    id: number,
+
+  }
+}
 
 export function SearchBar() {
 
   const [autocompleteState, setAutocompleteState] = useState({});
-  const [itemSelectedId, setItemSelectedId] = useState();
-  const [itemSelectedName, setItemSelectedName] = useState();
+  const [itemSelectedId, setItemSelectedId] = useState<number>();
+  const [itemSelectedName, setItemSelectedName] = useState<string>();
 
   const router = useRouter();
 
@@ -25,6 +34,8 @@ export function SearchBar() {
         onStateChange({ state }) {
           setAutocompleteState(state);
         },
+
+
         getSources({ setQuery, refresh, query, state }) {
           return [
             {
@@ -51,7 +62,7 @@ export function SearchBar() {
               getItemUrl({ item }) {
                 return item.url;
               },
-              onSelect: (item) => {
+              onSelect: (item : itemProps) => {
                 setQuery(item.item.name); 
                 setItemSelectedId(item.item.id);
                 setItemSelectedName(item.item.name);
