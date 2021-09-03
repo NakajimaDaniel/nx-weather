@@ -130,6 +130,7 @@ export function SearchBar() {
                     ))}
                   </ul>
                 )}
+                <img src="/assets/algolia-logo.svg" /> 
               </div>
             );
           })}
