@@ -134,7 +134,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
 
           {weatherForecastData.slice(0,5).map(data=> {
             return (
-            <div className={styles.forecastUnit}>
+            <div className={styles.forecastUnit} key={data.dt} >
               <p>{new Date(data.dt * 1000).toLocaleString('en', {weekday: 'long'})}</p>
               <p>{new Date(data.dt * 1000).toLocaleString('default', {
                 day: '2-digit',
