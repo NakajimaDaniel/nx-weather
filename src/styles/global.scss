@@ -62,10 +62,10 @@ body {
   overflow: hidden;
   width: 100%;
 
-
   img {
     position: absolute;
     padding-left: 0.4rem;
+    
   }
 
   >div {
@@ -75,4 +75,10 @@ body {
 
   }
 
+  .search-icon {
+    position: absolute;
+    padding-left: 0.4rem;
+  }
+
 }
+

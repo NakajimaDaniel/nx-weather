@@ -20,47 +20,53 @@
   }
 
 
-  >img {
+  // >img {
+  //   position: absolute;
+  //   left: 24%;
+  //   font-size: 18px;
+  //   padding-bottom: 1rem;
+  //   margin-left: -5rem;
+  // }
+
+}
+
+
+.HeaderImage {
+
     position: absolute;
     left: 24%;
     font-size: 18px;
     padding-bottom: 1rem;
     margin-left: -5rem;
-  }
 
 }
 
 @media screen and (max-width: 1100px) {
 
-  .HeaderContainer {
-    >img {
+  .HeaderImage {
       left: 20%;
       margin-left: -10rem
-    }
   }
 
 }
 
 
 @media screen and (max-width: 880px) {
-  .HeaderContainer {
-    >img {
-      width: 10rem;
-      left: 23%;
-    }
+  .HeaderImage {
+    width: 10rem;
+    left: 23%;
   }
 }
 
 @media screen and (max-width: 760px) {
   .HeaderContainer {
     flex-direction: column;
-
-
-    >img {
-      left: 0;
-      margin-left: 0;
-      position: unset;
-    }
-
   }
+
+  .HeaderImage {
+    left: 0;
+    margin-left: 0;
+    position: unset;
+  }
+
 }

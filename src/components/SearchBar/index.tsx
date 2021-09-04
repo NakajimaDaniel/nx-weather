@@ -5,6 +5,7 @@ import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import Loader from "react-loader-spinner";
+import Image from 'next/image'
 
 const searchClient = algoliasearch(
   'L4998G5UXB',
@@ -104,7 +105,10 @@ export function SearchBar() {
             width={20}
           />
         ) : (
-          <img src="/assets/searchIcon.svg"  /> 
+          <div className="search-icon" >
+            <Image src="/assets/searchIcon.svg"  alt="search-icon" width={25} height={25} layout="fixed" /> 
+          </div>
+          // <img src="/assets/searchIcon.svg"  /> 
         )}
       </div>
       <div className="aa-Panel" {...autocomplete.getPanelProps({})}>
@@ -130,7 +134,7 @@ export function SearchBar() {
                     ))}
                   </ul>
                 )}
-                <img src="/assets/algolia-logo.svg" /> 
+                <Image src="/assets/algolia-logo.svg" width={110} height={15} /> 
               </div>
             );
           })}

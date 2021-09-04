@@ -6,18 +6,11 @@ import { Header } from '../../components/Header';
 import { WeatherCard } from '../../components/WeatherCard';
 import styles from './cityWeather.module.scss';
 
-
-	
-
 import React, { createElement, useEffect, useState } from 'react';
 import { autocomplete,getAlgoliaResults } from '@algolia/autocomplete-js';
 import algoliasearch from 'algoliasearch';
 
-
-
-
-	
-
+import Image from 'next/image'
 
 
 
@@ -148,7 +141,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
                 month: '2-digit',
                 year: '2-digit'
               })}</p>
-              <img src={`http://openweathermap.org/img/wn/${data.icon}@2x.png`} /> 
+              <Image src={`http://openweathermap.org/img/wn/${data.icon}@2x.png`}  width={100} height={100} /> 
               <span>{data.tempDay}°C</span>
               <span>{data.tempMin}/{data.tempMax}°C</span>
             </div>

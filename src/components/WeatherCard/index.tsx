@@ -1,5 +1,6 @@
 
 import styles from './styles.module.scss'
+import Image from 'next/image'
 
 type WeatherCardProps = {
 
@@ -37,7 +38,7 @@ export function WeatherCard({weatherInfo, isNight}: WeatherCardProps) {
         </div>
 
         <div className={styles.cardContentSideInfo}>
-          <img src={`http://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`} />
+          <Image src={`http://openweathermap.org/img/wn/${weatherInfo.icon}@2x.png`} width={100} height={100} />
           <span>{Math.round(weatherInfo.minTemperature * 10) / 10}/{Math.round(weatherInfo.maxTemperature * 10) / 10 }ºC</span>
         </div>
       </div>
