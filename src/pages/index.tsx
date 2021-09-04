@@ -33,7 +33,7 @@ export default function Home({ weatherData }) {
 
         {weatherData.map(data => {
           return(
-          <WeatherCard weatherInfo={data} isNight={isNight} />
+          <WeatherCard weatherInfo={data} isNight={isNight} key={data.name} />
         )})}
       
       </div>
