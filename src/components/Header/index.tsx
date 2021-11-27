@@ -9,7 +9,7 @@ export function Header() {
     <div className={styles.HeaderContainer}>
       <Link href="/">
         <div className={styles.HeaderImage}>
-          <Image src="/assets/nx-weather-title.png"  width={160} height={26} />
+          <img src="/assets/nx-weather-title.png"  />
         </div>
       </Link>
       <SearchBar />
