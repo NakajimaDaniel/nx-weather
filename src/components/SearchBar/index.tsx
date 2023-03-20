@@ -12,7 +12,11 @@ export default function SearchBar() {
 
   return (
     <div>
-      <input onChange={(text) => onChangeInputSearch(text.target.value)} />
+      <input 
+      className={"h-7 rounded"}
+      onChange={(text) => onChangeInputSearch(text.target.value)} 
+      
+      />
     </div>
   )
 
