@@ -2,24 +2,11 @@
 import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
 
-import { Header } from '../../components/Header';
-import { WeatherCard } from '../../components/WeatherCard';
 import styles from './cityWeather.module.scss';
 
 import React, { createElement, useEffect, useState } from 'react';
-import { autocomplete,getAlgoliaResults } from '@algolia/autocomplete-js';
-import algoliasearch from 'algoliasearch';
 
 import Image from 'next/image'
-
-
-
-const apiid = '602BIBAIH0';
-const apikeyd = '47f26875cbaa4eaaef4a0f989fbc93ef'
-
-const searchClient = algoliasearch(apiid, apikeyd);
-
-
 
 interface cityWeatherProps {
   weatherDataCurrent: {
@@ -57,7 +44,7 @@ interface weatherForecastUnit {
 }
 
 export default function CityWeather({weatherForecastData,weatherDataCurrent }:cityWeatherProps) {
-
+  /*
   const router = useRouter();
 
   const UTCHour = new Date((weatherDataCurrent.dt * 1000) + (weatherDataCurrent.timezone * 1000)).getUTCHours();
@@ -154,6 +141,13 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
       </div>
 
 
+    </div>
+  )
+  */
+
+  return (
+    <div>
+      
     </div>
   )
 }
