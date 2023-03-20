@@ -3,7 +3,7 @@ import Image from 'next/image'
 import logo from '../../public/assets/nxweather.png'
 
 import { Noto_Sans } from 'next/font/google'
-import SearchBar  from '../components/SearchBar'
+import SearchBar from '../components/SearchBar'
 
 
 
