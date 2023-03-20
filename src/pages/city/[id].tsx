@@ -1,12 +1,10 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
-
 import styles from './cityWeather.module.scss';
-
 import React, { createElement, useEffect, useState } from 'react';
-
 import Image from 'next/image'
+
 
 interface cityWeatherProps {
   weatherDataCurrent: {
@@ -41,9 +39,9 @@ interface weatherForecastUnit {
   windGust: number,
   windDeg: number,
   PrecipitationProp: number,
-}
+} 
 
-export default function CityWeather({weatherForecastData,weatherDataCurrent }:cityWeatherProps) {
+export default function CityWeather({weatherForecastData,weatherDataCurrent }: cityWeatherProps) {
   /*
   const router = useRouter();
 
@@ -144,6 +142,8 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
     </div>
   )
   */
+
+  console.log(weatherForecastData )
 
   return (
     <div>
