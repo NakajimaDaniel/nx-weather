@@ -4,7 +4,8 @@ import { useRouter } from 'next/dist/client/router';
 import styles from './cityWeather.module.scss';
 import React, { createElement, useEffect, useState } from 'react';
 import Image from 'next/image'
-
+import { Icon } from '@iconify/react';
+import Cloud  from '../../../public/assets/cloud.png'
 
 interface cityWeatherProps {
   weatherDataCurrent: {
@@ -146,9 +147,77 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
   console.log(weatherForecastData )
 
   return (
-    <div>
+    <main>
       
-    </div>
+      <div className={"flex flex-col items-center h-full"} >
+        <div className={"flex flex-row  pb-2 pt-6"}>
+          <Icon icon="mdi:map-marker" className={"text-custom-purple-400 pt-1"} width="24px" />
+          <h4 className={"text-white font-bold text-2xl"}>Sao Paulo, BR</h4>
+        </div>
+        <Image src={Cloud} alt="" />
+        <div className={"flex flex-row pb-2"}>
+          <div className={"text-white font-bold text-3xl"}>28.2ºC</div>
+        </div>
+        <div className={"flex flex-row pb-2"}>
+          <div className={"text-white font-bold text-lg"}>Few clouds</div>
+        </div>
+        <div className={"flex flex-row gap-10 pb-4"}>
+          <div className={"text-white font-bold text-sm"}>Max: 30ºC</div>
+          <div className={"text-white font-bold text-sm"}>Min: 26ºC</div>
+        </div>
+        <div className={"flex flex-row sm:gap-10 gap-2 pb-10"}>
+          <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
+            <Icon icon="fluent:weather-drizzle-20-filled" className={"text-white/70"} width="27px" />
+            <div className={"text-white/70 font-bold text-sm"}>30%</div>
+          </div>
+
+          <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
+            <Icon icon="uil:raindrops" className={"text-white/70"} width="20px" />
+            <div className={"text-white/70 font-bold text-sm"}>30%</div>
+          </div>
+
+          <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
+            <Icon icon="fluent:weather-duststorm-20-filled" className={"text-white/70"} width="20px" />
+            <div className={"text-white/70 font-bold text-sm"}>3km/h</div>
+          </div>
+        </div>
+
+        <div className={"flex flex-col bg-custom-purple-450/40 p-5 rounded-xl md:w-2/5 mb-10"}>
+          <h2 className={"text-white/70 font-bold text-2xl pb-5"}>Weather for tommorow</h2>
+          <h2 className={"text-white/70 font-bold text-2xl pb-10"}>27.2ºC</h2>
+          <div className={"flex flex-row gap-10"}>
+            <div className={"flex flex-row items-center gap-2"}>
+              <Icon icon="fluent:weather-drizzle-20-filled" className={"text-white/70"} width="27px" />
+              <div className={"text-white/70 font-bold text-sm"}>30%</div>
+            </div>
+
+            <div className={"flex flex-row items-center gap-2"}>
+              <Icon icon="uil:raindrops" className={"text-white/70"} width="20px" />
+              <div className={"text-white/70 font-bold text-sm"}>30%</div>
+            </div>
+
+            <div className={"flex flex-row items-center gap-2"}>
+              <Icon icon="fluent:weather-duststorm-20-filled" className={"text-white/70"} width="20px" />
+              <div className={"text-white/70 font-bold text-sm"}>3km/h</div>
+            </div>
+          </div>
+        </div>
+
+        <div className={"flex flex-row bg-custom-purple-450/40 p-5 rounded-xl md:w-2/5"}>
+          <div className={"flex flex-col items-center"}>
+            <h3 className={"text-white/70 font-bold text-sm"}>Tommorow</h3>
+            <h4 className={"text-white/70 font-bold text-sm"}>28.3ºC</h4>
+            <div className={"flex flex-row gap-3"}>
+              <h5 className={"text-white/70 font-bold text-sm"}>30.4ºC</h5>
+              <h5 className={"text-white/70 font-bold text-sm"}>27.4ºC</h5>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      
+    </main>
   )
 }
 
