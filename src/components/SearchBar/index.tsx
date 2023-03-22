@@ -1,89 +1,58 @@
+import { Fragment, useEffect, useState } from "react"
+import { Combobox, Transition } from '@headlessui/react'
+import { useRouter } from "next/router"
 
-import algoliasearch from 'algoliasearch/lite';
-import { createAutocomplete } from '@algolia/autocomplete-core';
-import { getAlgoliaResults } from '@algolia/autocomplete-preset-algolia';
-import { useMemo, useState } from 'react';
-import { useRouter } from 'next/dist/client/router';
-import Loader from "react-loader-spinner";
-import Image from 'next/image'
+type cityUnit = {
+  country: string,
+  id: number,
+  name: string,
+  _id: number
+} 
 
-const searchClient = algoliasearch(
-  'L4998G5UXB',
-  'c1271a9298769d286887fbad97fa030d'
-);
-
-
-type itemProps = {
-  item: {
-    name: string,
-    id: number,
-
-  }
+type cityProps = {
+  cityArray: Array<cityUnit>
 }
 
-export function SearchBar() {
 
-  const [autocompleteState, setAutocompleteState] = useState({});
-  const [itemSelectedId, setItemSelectedId] = useState<number>();
-  const [itemSelectedName, setItemSelectedName] = useState<string>();
 
+export default function SearchBar() {
+
+  const [searchText, setSearchText] = useState("");
+  const [cityList, setCityList] = useState([]);
+  const [selected, setSelected] = useState<cityUnit>();
+  
   const router = useRouter();
 
-  const autocomplete = useMemo(
-    () =>
-      createAutocomplete({
-        onStateChange({ state }) {
-          setAutocompleteState(state);
-        },
+  async function FetchCities(value) { 
+    const res = await fetch(`/api/city/${value}`)
+    const data = await res.json();
 
+    const cities = data.map(value => {
+      return {
+        _id: value._id,
+        id: value.id,
+        name: value.name,
+        country: value.country
+      }
+    })
 
-        getSources({ setQuery, refresh, query, state }) {
-          return [
-            {
-              sourceId: 'name',
-              getItemInputValue({ item }) {
-                return item.query;
-              },
-              getItems({ query }) {
-                return getAlgoliaResults({
-                  searchClient,
-                  queries: [
-                    {
-                      indexName: 'city_list',
-                      query,
-                      params: {
-                        hitsPerPage: 4,
-                        highlightPreTag: '<mark>',
-                        highlightPostTag: '</mark>',
-                      },
-                    },
-                  ],
-                });
-              },
-              getItemUrl({ item }) {
-                return item.url;
-              },
-              onSelect: (item : itemProps) => {
-                setQuery(item.item.name); 
-                setItemSelectedId(item.item.id);
-                setItemSelectedName(item.item.name);
-
-              },
-              
-
-            },
-        
-          ];
-        },
-        
-      }),
-    []
-  );
+    setCityList(cities);
+  } 
+ 
+  function onChangeInputSearch(e) {
+    const newText = e.target.value;
+    setSearchText(newText);
+    if (newText.charAt(0) === " " || newText.length == 0) {
+      //console.log('input value is empty');
+    } else {
+      FetchCities(newText);
+    }
+  }
 
   function handleSearchInputKeyPress(e) {
     if(e.key === 'Enter') {
-      if(itemSelectedName == e.target.value) {
-        router.push(`/city/${itemSelectedId}`);
+      if(selected.name == e.target.value) {
+        router.push(`/city/${selected.id}`);
       }
       else{
         alert('this city does not exist')
@@ -93,53 +62,71 @@ export function SearchBar() {
 
 
   return (
+    <div className={" "}>
 
-    <div className="aa-Autocomplete" {...autocomplete.getRootProps({})}>
-      <div className="search-input-container">
-        <input className="aa-Input" {...autocomplete.getInputProps({})} placeholder="Search ..." onKeyPress={handleSearchInputKeyPress} />
-        {autocompleteState.status == 'loading' ? (
-          <Loader
-            type="TailSpin"
-            color="#00BFFF"
-            height={20}
-            width={20}
-          />
-        ) : (
-          <div className="search-icon" >
-            <Image src="/assets/searchIcon.svg"  alt="search-icon" width={25} height={25} layout="fixed" /> 
+      <Combobox onChange={setSelected} defaultValue={selected}>
+        <div className="relative mt-1">
+          <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <Combobox.Input
+              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+              displayValue={(city: cityUnit) => city.name}
+              onChange={(e) => onChangeInputSearch(e)}
+              onKeyUp={(e) => handleSearchInputKeyPress(e)}
+            />
+
           </div>
-          // <img src="/assets/searchIcon.svg"  /> 
-        )}
-      </div>
-      <div className="aa-Panel" {...autocomplete.getPanelProps({})}>
-        {autocompleteState.isOpen &&
-          autocompleteState.collections.map((collection, index) => {
-            const { source, items } = collection;
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            afterLeave={() => setSearchText('')}
+          >
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {
+                cityList.length === 0 ? (
+                  <div className={"py-2 px-4 text-gray-700"} >Nothing found</div>
+                ) : (
+                  cityList.map((city) => (
+                    <Combobox.Option
+                      key={city.id}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                          active ? 'bg-custom-purple-400 text-white' : 'text-gray-900'
+                        }`
+                      }
+                      value={city}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <span
+                            className={`block truncate ${
+                              selected ? 'font-medium' : 'font-normal'
+                            }`}
+                          >
+                            {city.name}, {city.country}
+                          </span>
+                          {selected ? (
+                            <span
+                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                active ? 'text-white' : 'text-custom-purple-400'
+                              }`}
+                            >
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Combobox.Option>
+                  ))
+                )
+              }
+            </Combobox.Options>
+          </Transition>
+        </div>
+      </Combobox>
+    
 
-            return (
-              <div key={`source-${index}`} className="aa-Source">
-                {items.length > 0 && (
-                  <ul className="aa-List" {...autocomplete.getListProps()}>
-                    {items.map((item) => (
-                      <li
-                        key={item.objectID}
-                        className="aa-Item"
-                        {...autocomplete.getItemProps({
-                          item,
-                          source,
-                        })}
-                      >
-                        {item.name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <Image src="/assets/algolia-logo.svg" width={110} height={15} /> 
-              </div>
-            );
-          })}
-      </div>
     </div>
-  );
+  )
 
 }
