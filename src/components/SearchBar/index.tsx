@@ -24,7 +24,7 @@ export default function SearchBar() {
   const router = useRouter();
 
   async function FetchCities(value) { 
-    const res = await fetch(`http://localhost:3000/api/city/${value}`)
+    const res = await fetch(`/api/city/${value}`)
     const data = await res.json();
 
     const cities = data.map(value => {
