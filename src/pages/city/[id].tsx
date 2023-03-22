@@ -56,10 +56,7 @@ interface weatherTypes {
 
 export default function CityWeather({weatherForecastData,weatherDataCurrent }: cityWeatherProps) {
  
-  console.log(weatherForecastData)
-  console.log(weatherDataCurrent)
-
-  //const weatherTypes = ["clear sky", "few clouds", "scattered clouds", "broken clouds", "shower rain", "rain", "thunderstorm", "snow", "mist"]
+ 
   const weatherTypes:weatherTypes[] = [
     {
       name: "clear sky",
