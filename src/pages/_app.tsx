@@ -13,7 +13,7 @@ const NotoSans = Noto_Sans({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${NotoSans.variable} font-sans`}>
+    <main>
        <Component {...pageProps} />
     </main>
   )

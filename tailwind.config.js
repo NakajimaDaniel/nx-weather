@@ -20,7 +20,7 @@ module.exports = {
         
       },
       fontFamily: {
-        sans: ['var(--font-noto)', ...fontFamily.sans],
+        sans: ['noto-sans', ...fontFamily.sans],
       },
 
     },
