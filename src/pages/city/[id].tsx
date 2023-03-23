@@ -153,7 +153,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
           </div>
         </div>
 
-        <div className={"flex flex-col bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  sm:w-9/12 mr-10 ml-10 mb-10"}>
+        <div className={"flex flex-col bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5 w-10/12 mb-10"}>
           <h2 className={"text-white/70 font-bold text-2xl pb-5"}>Weather for tommorow</h2>
           <h2 className={"text-white/70 font-bold text-2xl pb-10"}>{Math.round(weatherForecastData[0].tempDay * 10) / 10}ºC</h2>
           <div className={"flex flex-row gap-10"}>
@@ -174,7 +174,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
           </div>
         </div>
 
-        <div className={"relative flex flex-row bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  w-9/12 mr-10 ml-10 overflow-auto"}>
+        <div className={"relative flex flex-row bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  w-10/12 overflow-auto"}>
 
         
           {weatherForecastData.slice(1,6).map(data => {
