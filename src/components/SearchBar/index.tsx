@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useState } from "react"
 import { Combobox, Transition } from '@headlessui/react'
 import { useRouter } from "next/router"
 
@@ -11,11 +11,6 @@ type cityUnit = {
   name: string,
   _id: number
 } 
-
-type cityProps = {
-  cityArray: Array<cityUnit>
-}
-
 
 
 export default function SearchBar() {
@@ -69,8 +64,6 @@ export default function SearchBar() {
   return (
     <div className={" "}>
 
-
-
       <Combobox onChange={setSelected} defaultValue={selected}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
@@ -80,12 +73,12 @@ export default function SearchBar() {
               onChange={(e) => onChangeInputSearch(e)}
               onKeyUp={(e) => handleSearchInputKeyPress(e)}
             />
-          <MoonLoader
-          className={"absolute right-3 top-2 flex items-center pr-2"}
-            color="#7943CF"
-            loading={loading}
-            size={20}
-          />
+            <MoonLoader
+              className={"absolute right-3 top-2 flex items-center pr-2"}
+              color="#7943CF"
+              loading={loading}
+              size={20}
+            />
           </div>
           <Transition
             as={Fragment}
