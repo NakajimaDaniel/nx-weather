@@ -1,25 +1,16 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/dist/client/router';
-
-import { Header } from '../../components/Header';
-import { WeatherCard } from '../../components/WeatherCard';
 import styles from './cityWeather.module.scss';
-
 import React, { createElement, useEffect, useState } from 'react';
-import { autocomplete,getAlgoliaResults } from '@algolia/autocomplete-js';
-import algoliasearch from 'algoliasearch';
-
-import Image from 'next/image'
-
-
-
-const apiid = '602BIBAIH0';
-const apikeyd = '47f26875cbaa4eaaef4a0f989fbc93ef'
-
-const searchClient = algoliasearch(apiid, apikeyd);
-
-
+import Image, { StaticImageData } from 'next/image'
+import { Icon } from '@iconify/react';
+import Cloud from '../../../public/assets/cloud.png'
+import Sun from '../../../public/assets/sun.png'
+import SunCloud from '../../../public/assets/cloud-sun.png'
+import Rain from '../../../public/assets/rain.png'
+import Thunder from '../../../public/assets/thunder.png'
+import Mist from '../../../public/assets/mist.png'
 
 interface cityWeatherProps {
   weatherDataCurrent: {
@@ -33,6 +24,8 @@ interface cityWeatherProps {
     timezone: number,
     icon: string,
     country: string,
+    windSpeed:number,
+    weatherStatus: string,
   },
 
   weatherForecastData: Array<weatherForecastUnit>
@@ -54,6 +47,7 @@ interface weatherForecastUnit {
   windGust: number,
   windDeg: number,
   PrecipitationProp: number,
+<<<<<<< HEAD
 }
 
 <<<<<<< Updated upstream
@@ -64,14 +58,24 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
   const UTCHour = new Date((weatherDataCurrent.dt * 1000) + (weatherDataCurrent.timezone * 1000)).getUTCHours();
 
   const [isNight, setIsNight] = useState(false);
+=======
+} 
+>>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
 
+interface weatherTypes {
+  name: string,
+  icon: StaticImageData
+}
 
+<<<<<<< HEAD
   useEffect(() => {
     if(UTCHour >= 18 || UTCHour>= 0 && UTCHour <= 5) {
       setIsNight(true);
     } else {
       setIsNight(false);
 =======
+=======
+>>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
 export default function CityWeather({weatherForecastData,weatherDataCurrent }: cityWeatherProps) {
  
  
@@ -105,10 +109,13 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
       icon: Rain,
     },
     {
+<<<<<<< HEAD
       name: "moderate rain",
       icon: Rain,
     },
     {
+=======
+>>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
       name: "thunderstorm",
       icon: Thunder,
     },
@@ -125,64 +132,73 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
   const currentWeatherIcon = weatherTypes.filter(data => {
     if (data.name == weatherDataCurrent.description) {
       return data
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
     }
-  }, [UTCHour])
+  }).map(data => {return data.icon}).pop()
 
   console.log(weatherForecastData)
 
-  if(router.isFallback) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-
-
-
   return (
-    <div className={isNight?  styles.cityWeatherContainer : styles.cityWeatherContainerDay}>
-      	
-      <Header /> 
-      <WeatherCard  weatherInfo={weatherDataCurrent} isNight={isNight} />
-
-      <div className={styles.tomorrowWeather}>
-        <div>
-          <span>Weather for tomorrow</span>
-          <h1>{Math.round(weatherForecastData[0].tempDay * 10) / 10}ºC</h1>
+    <main>
+      
+      <div className={"flex flex-col items-center h-full"} >
+        <div className={"flex flex-row  pb-2 pt-6"}>
+          <Icon icon="mdi:map-marker" className={"text-custom-purple-400 pt-1"} width="24px" />
+          <h4 className={"text-white font-bold text-2xl"}>{weatherDataCurrent.city}, {weatherDataCurrent.country}</h4>
         </div>
-
-        <div className={styles.tomorrowWeatherDataWrapper}>
-          <div className={styles.tomorrowWeatherData}>
-            <div>
-              <span><i className="wi wi-thermometer"></i> {Math.round(weatherForecastData[0].tempMin * 10) / 10}/{Math.round(weatherForecastData[0].tempMax * 10) / 10}°C</span>
-            </div>
-            <div>
-              <span><i className="wi wi-barometer"></i> {Math.round(weatherForecastData[0].pressure * 10) / 10} hPa</span>
-            </div>
-            <div>
-              <span><i className="wi wi-humidity"></i> {Math.round(weatherForecastData[0].humidity * 10) / 10}%</span>
-            </div>
-
-            <div>
-              <span><i className="wi wi-windy"></i> {Math.round(weatherForecastData[0].windSpeed * 10) / 10} metre/sec</span>
-            </div>
-            <div>
-              <span><i className="wi wi-dust"></i> {Math.round(weatherForecastData[0].windGust * 10) / 10} metre/sec</span>
-            </div>
-            <div>
-              <span>{weatherForecastData[0].windDeg}º</span>
-            </div>
-
-            <div>
-              <span><i className="wi wi-raindrops"></i> {Math.round(weatherForecastData[0].PrecipitationProp * 10) / 10} %</span>
-            </div>
-
+        <Image src={currentWeatherIcon} alt="" />
+        <div className={"flex flex-row pb-2"}>
+          <div className={"text-white font-bold text-3xl"}>{Math.round(weatherDataCurrent.temperature * 10) / 10}ºC</div>
+        </div>
+        <div className={"flex flex-row pb-2"}>
+          <div className={"text-white font-bold text-lg"}>{weatherDataCurrent.description}</div>
+        </div>
+        <div className={"flex flex-row gap-10 pb-4"}>
+          <div className={"text-white font-bold text-sm"}>Max: {Math.round(weatherDataCurrent.maxTemperature)}ºC</div>
+          <div className={"text-white font-bold text-sm"}>Min: {Math.round(weatherDataCurrent.minTemperature)}ºC</div>
+        </div>
+        <div className={"flex flex-row sm:gap-10 gap-2 pb-10"}>
+          <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
+            <Icon icon="fluent:weather-drizzle-20-filled" className={"text-white/70"} width="27px" />
+            <div className={"text-white/70 font-bold text-sm"}>30%</div>
           </div>
 
+          <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
+            <Icon icon="uil:raindrops" className={"text-white/70"} width="20px" />
+            <div className={"text-white/70 font-bold text-sm"}>{weatherDataCurrent.humidity}%</div>
+          </div>
 
+          <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
+            <Icon icon="fluent:weather-duststorm-20-filled" className={"text-white/70"} width="20px" />
+            <div className={"text-white/70 font-bold text-sm"}>{Math.round(weatherDataCurrent.windSpeed)}m/s</div>
+          </div>
         </div>
-      </div>
 
+        <div className={"flex flex-col bg-custom-purple-450/40 p-5 rounded-xl md:w-2/5 mb-10"}>
+          <h2 className={"text-white/70 font-bold text-2xl pb-5"}>Weather for tommorow</h2>
+          <h2 className={"text-white/70 font-bold text-2xl pb-10"}>{Math.round(weatherForecastData[0].tempDay * 10) / 10}ºC</h2>
+          <div className={"flex flex-row gap-10"}>
+            <div className={"flex flex-row items-center gap-2"}>
+              <Icon icon="fluent:weather-drizzle-20-filled" className={"text-white/70"} width="27px" />
+              <div className={"text-white/70 font-bold text-sm"}>{Math.round(weatherForecastData[0].PrecipitationProp * 10) / 10}%</div>
+            </div>
+
+            <div className={"flex flex-row items-center gap-2"}>
+              <Icon icon="uil:raindrops" className={"text-white/70"} width="20px" />
+              <div className={"text-white/70 font-bold text-sm"}> {Math.round(weatherForecastData[0].humidity * 10) / 10}%</div>
+            </div>
+
+            <div className={"flex flex-row items-center gap-2"}>
+              <Icon icon="fluent:weather-duststorm-20-filled" className={"text-white/70"} width="20px" />
+              <div className={"text-white/70 font-bold text-sm"}>{Math.round(weatherForecastData[0].windSpeed * 10) / 10}m/s</div>
+            </div>
+          </div>
+        </div>
+
+<<<<<<< HEAD
 <<<<<<< Updated upstream
       <div className={styles.forecastContainer}>
         <p>Forecast for the next 5 days</p>
@@ -207,6 +223,12 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
           {weatherForecastData.slice(1,6).map(data => {
             return(
             <div className={"static flex flex-col items-center ml-5"} key={data.dt}>
+=======
+        <div className={"flex flex-row bg-custom-purple-450/40 p-5 rounded-xl md:w-2/5"}>
+          {weatherForecastData.slice(1,6).map(data => {
+            return(
+            <div className={"flex flex-col items-center ml-5"} key={data.dt}>
+>>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
               <h3 className={"text-white/70 font-bold text-sm"}>{new Date(data.dt * 1000).toLocaleString('en', {weekday: 'long'})}</h3>
               <Image src={
                 weatherTypes.filter(weatherData => {
@@ -222,18 +244,20 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
                 <h5 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempMax)}ºC</h5>
                 <h5 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempMin)}ºC</h5>
               </div>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
             </div>
             )
-          })}  
-
+          })}
 
         </div>
 
+
       </div>
-
-
-    </div>
+      
+    </main>
   )
 }
 
@@ -241,7 +265,6 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
 export const getServerSideProps = async ({params}) => {
 
   const res = await axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${params.id}&appid=${process.env.OPEN_WEATHER_API_KEY}&units=metric `);
-  const data = await res.data;
 
   const lat = res.data.coord.lat;
   const lon = res.data.coord.lon;
@@ -258,11 +281,12 @@ export const getServerSideProps = async ({params}) => {
     timezone: res.data.timezone,
     icon: res.data.weather.map(data => {return data.icon}).pop(),
     country: res.data.sys.country,
+    windSpeed:res.data.wind.speed,
+    weatherStatus: res.data.weather.map(data => {return data.main}).pop(),
+
   }
 
   const res2 = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${process.env.OPEN_WEATHER_API_KEY}&units=metric `)
-  const data2 = res2.data;
-
 
   const weatherForecastData = 
 
@@ -287,8 +311,6 @@ export const getServerSideProps = async ({params}) => {
         
       }
     })
-
-  
 
   return {
     props: {
