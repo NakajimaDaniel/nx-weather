@@ -24,7 +24,7 @@ export default function Home() {
       
       <div className={"flex flex-col justify-center items-center h-full"} >
         <Image className={"pb-5"} src={logo} alt=""/>
-        <h4 className={"text-white pb-2"}>Start Searching: </h4>
+        <h4 className={"text-white"}>Start Searching: </h4>
         <SearchBar />
       </div>
       
