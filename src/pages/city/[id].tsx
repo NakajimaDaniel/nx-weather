@@ -56,6 +56,7 @@ interface weatherForecastUnit {
   PrecipitationProp: number,
 }
 
+<<<<<<< Updated upstream
 export default function CityWeather({weatherForecastData,weatherDataCurrent }:cityWeatherProps) {
 
   const router = useRouter();
@@ -70,9 +71,65 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
       setIsNight(true);
     } else {
       setIsNight(false);
+=======
+export default function CityWeather({weatherForecastData,weatherDataCurrent }: cityWeatherProps) {
+ 
+ 
+  const weatherTypes:weatherTypes[] = [
+    {
+      name: "clear sky",
+      icon: Sun
+    },
+    {
+      name: "few clouds",
+      icon: SunCloud,
+    },
+    {
+      name: "scattered clouds",
+      icon: Cloud,
+    },
+    {
+      name: "broken clouds",
+      icon: Cloud,
+    },
+    {
+      name: "shower rain",
+      icon: Rain,
+    },
+    {
+      name: "rain",
+      icon: Rain,
+    },
+    {
+      name: "light rain",
+      icon: Rain,
+    },
+    {
+      name: "moderate rain",
+      icon: Rain,
+    },
+    {
+      name: "thunderstorm",
+      icon: Thunder,
+    },
+    {
+      name: "snow",
+      icon: Mist,
+    },
+    {
+      name: "mist",
+      icon: Mist,
+    },
+  ]
+
+  const currentWeatherIcon = weatherTypes.filter(data => {
+    if (data.name == weatherDataCurrent.description) {
+      return data
+>>>>>>> Stashed changes
     }
   }, [UTCHour])
 
+  console.log(weatherForecastData)
 
   if(router.isFallback) {
     return (
@@ -126,6 +183,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
         </div>
       </div>
 
+<<<<<<< Updated upstream
       <div className={styles.forecastContainer}>
         <p>Forecast for the next 5 days</p>
 
@@ -144,6 +202,27 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }:ci
               <Image src={`http://openweathermap.org/img/wn/${data.icon}@2x.png`}  width={100} height={100} /> 
               <span>{data.tempDay}°C</span>
               <span>{data.tempMin}/{data.tempMax}°C</span>
+=======
+        <div className={"relative flex flex-row bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  sm:w-9/12 mr-10 ml-10 overflow-auto"}>
+          {weatherForecastData.slice(1,6).map(data => {
+            return(
+            <div className={"static flex flex-col items-center ml-5"} key={data.dt}>
+              <h3 className={"text-white/70 font-bold text-sm"}>{new Date(data.dt * 1000).toLocaleString('en', {weekday: 'long'})}</h3>
+              <Image src={
+                weatherTypes.filter(weatherData => {
+                  if (weatherData.name == data.weatherDescription) {
+                    return data
+                  }
+                  }).map(data => {return data.icon}).pop()
+
+              } alt=""/>
+      
+              <h4 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempDay)}ºC</h4>
+              <div className={"flex flex-row gap-3"}>
+                <h5 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempMax)}ºC</h5>
+                <h5 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempMin)}ºC</h5>
+              </div>
+>>>>>>> Stashed changes
             </div>
             )
           })}  
