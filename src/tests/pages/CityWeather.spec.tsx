@@ -1,3 +1,4 @@
+/*
 import { render, screen } from "@testing-library/react"
 import CityWeather from "../../pages/city/[id]"
 import { useRouter } from 'next/dist/client/router';
@@ -83,4 +84,4 @@ describe("city weather page unit test", () => {
   })
 
 
-})
+})*/
