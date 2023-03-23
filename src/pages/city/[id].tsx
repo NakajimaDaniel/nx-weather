@@ -47,35 +47,16 @@ interface weatherForecastUnit {
   windGust: number,
   windDeg: number,
   PrecipitationProp: number,
-<<<<<<< HEAD
+
 }
 
-<<<<<<< Updated upstream
-export default function CityWeather({weatherForecastData,weatherDataCurrent }:cityWeatherProps) {
-
-  const router = useRouter();
-
-  const UTCHour = new Date((weatherDataCurrent.dt * 1000) + (weatherDataCurrent.timezone * 1000)).getUTCHours();
-
-  const [isNight, setIsNight] = useState(false);
-=======
-} 
->>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
 
 interface weatherTypes {
   name: string,
   icon: StaticImageData
 }
 
-<<<<<<< HEAD
-  useEffect(() => {
-    if(UTCHour >= 18 || UTCHour>= 0 && UTCHour <= 5) {
-      setIsNight(true);
-    } else {
-      setIsNight(false);
-=======
-=======
->>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
+
 export default function CityWeather({weatherForecastData,weatherDataCurrent }: cityWeatherProps) {
  
  
@@ -109,13 +90,11 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
       icon: Rain,
     },
     {
-<<<<<<< HEAD
       name: "moderate rain",
       icon: Rain,
     },
     {
-=======
->>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
+
       name: "thunderstorm",
       icon: Thunder,
     },
@@ -132,14 +111,9 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
   const currentWeatherIcon = weatherTypes.filter(data => {
     if (data.name == weatherDataCurrent.description) {
       return data
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
     }
   }).map(data => {return data.icon}).pop()
 
-  console.log(weatherForecastData)
 
   return (
     <main>
@@ -198,37 +172,13 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
           </div>
         </div>
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-      <div className={styles.forecastContainer}>
-        <p>Forecast for the next 5 days</p>
-
-        <div className={styles.forecastWrapper}>
-
-
-          {weatherForecastData.slice(0,5).map(data=> {
-            return (
-            <div className={styles.forecastUnit} key={data.dt} >
-              <p>{new Date(data.dt * 1000).toLocaleString('en', {weekday: 'long'})}</p>
-              <p>{new Date(data.dt * 1000).toLocaleString('default', {
-                day: '2-digit',
-                month: '2-digit',
-                year: '2-digit'
-              })}</p>
-              <Image src={`http://openweathermap.org/img/wn/${data.icon}@2x.png`}  width={100} height={100} /> 
-              <span>{data.tempDay}°C</span>
-              <span>{data.tempMin}/{data.tempMax}°C</span>
-=======
         <div className={"relative flex flex-row bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  sm:w-9/12 mr-10 ml-10 overflow-auto"}>
-          {weatherForecastData.slice(1,6).map(data => {
-            return(
-            <div className={"static flex flex-col items-center ml-5"} key={data.dt}>
-=======
-        <div className={"flex flex-row bg-custom-purple-450/40 p-5 rounded-xl md:w-2/5"}>
+
+        
           {weatherForecastData.slice(1,6).map(data => {
             return(
             <div className={"flex flex-col items-center ml-5"} key={data.dt}>
->>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
+
               <h3 className={"text-white/70 font-bold text-sm"}>{new Date(data.dt * 1000).toLocaleString('en', {weekday: 'long'})}</h3>
               <Image src={
                 weatherTypes.filter(weatherData => {
@@ -244,22 +194,19 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
                 <h5 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempMax)}ºC</h5>
                 <h5 className={"text-white/70 font-bold text-sm"}>{Math.round(data.tempMin)}ºC</h5>
               </div>
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 14f56a8ae237202c17f7748cc4cb528504818fe8
+
             </div>
             )
           })}
 
         </div>
 
-
       </div>
       
     </main>
   )
 }
+
 
 
 export const getServerSideProps = async ({params}) => {
