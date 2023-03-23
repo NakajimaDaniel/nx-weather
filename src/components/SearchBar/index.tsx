@@ -3,6 +3,7 @@ import { Combobox, Transition } from '@headlessui/react'
 import { useRouter } from "next/router"
 
 import MoonLoader from "react-spinners/ClipLoader";
+import { Icon } from "@iconify/react";
 
 
 type cityUnit = {
@@ -73,8 +74,9 @@ export default function SearchBar() {
       <Combobox onChange={setSelected} defaultValue={selected}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <Icon icon="ic:round-search" className={"absolute left-2 top-2 flex items-center"} width="20px" />
             <Combobox.Input
-              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+              className="w-full border-none py-2 pl-3 pr-20 ml-6 text-sm leading-5 text-gray-900 focus:ring-0"
               displayValue={(city: cityUnit) => city.name}
               onChange={(e) => onChangeInputSearch(e)}
               onKeyUp={(e) => handleSearchInputKeyPress(e)}
@@ -85,6 +87,7 @@ export default function SearchBar() {
               loading={loading}
               size={20}
             />
+            
           </div>
           <Transition
             as={Fragment}
