@@ -2,6 +2,9 @@ import { Fragment, useEffect, useState } from "react"
 import { Combobox, Transition } from '@headlessui/react'
 import { useRouter } from "next/router"
 
+import MoonLoader from "react-spinners/ClipLoader";
+
+
 type cityUnit = {
   country: string,
   id: number,
@@ -20,6 +23,7 @@ export default function SearchBar() {
   const [searchText, setSearchText] = useState("");
   const [cityList, setCityList] = useState([]);
   const [selected, setSelected] = useState<cityUnit>();
+  const [loading, setLoading] = useState(false);
   
   const router = useRouter();
 
@@ -52,6 +56,7 @@ export default function SearchBar() {
   function handleSearchInputKeyPress(e) {
     if(e.key === 'Enter') {
       if(selected.name == e.target.value) {
+        setLoading(true);
         router.push(`/city/${selected.id}`);
       }
       else{
@@ -64,6 +69,8 @@ export default function SearchBar() {
   return (
     <div className={" "}>
 
+
+
       <Combobox onChange={setSelected} defaultValue={selected}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
@@ -73,7 +80,12 @@ export default function SearchBar() {
               onChange={(e) => onChangeInputSearch(e)}
               onKeyUp={(e) => handleSearchInputKeyPress(e)}
             />
-
+          <MoonLoader
+          className={"absolute right-3 top-2 flex items-center pr-2"}
+            color="#7943CF"
+            loading={loading}
+            size={20}
+          />
           </div>
           <Transition
             as={Fragment}
