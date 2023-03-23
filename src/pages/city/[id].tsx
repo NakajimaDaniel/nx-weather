@@ -119,22 +119,22 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
   return (
     <main>
       
-      <div className={"flex flex-col items-center h-full"} >
-      <SearchBar />
-        <div className={"flex flex-row  pb-2 pt-6"}>
+      <div className={"flex flex-col items-center justify-center h-full"} >
+        <SearchBar />
+        <div className={"flex flex-row  align-center pb-2 pt-6"}>
           <Icon icon="mdi:map-marker" className={"text-custom-purple-400 pt-1"} width="24px" />
           <h4 className={"text-white font-bold text-2xl"}>{weatherDataCurrent.city}, {weatherDataCurrent.country}</h4>
         </div>
         <Image src={currentWeatherIcon} alt="" />
-        <div className={"flex flex-row pb-2"}>
-          <div className={"text-white font-bold text-3xl"}>{Math.round(weatherDataCurrent.temperature * 10) / 10}ºC</div>
+        <div className={"flex flex-row pb-2 align-center"}>
+          <h4 className={"text-white font-bold text-3xl"}>{Math.round(weatherDataCurrent.temperature * 10) / 10}ºC</h4>
         </div>
-        <div className={"flex flex-row pb-2"}>
-          <div className={"text-white font-bold text-lg"}>{weatherDataCurrent.description}</div>
+        <div className={"flex flex-row pb-2 align-center"}>
+          <h5 className={"text-white font-bold text-lg"}>{weatherDataCurrent.description}</h5>
         </div>
-        <div className={"flex flex-row gap-10 pb-4"}>
-          <div className={"text-white font-bold text-sm"}>Max: {Math.round(weatherDataCurrent.maxTemperature)}ºC</div>
-          <div className={"text-white font-bold text-sm"}>Min: {Math.round(weatherDataCurrent.minTemperature)}ºC</div>
+        <div className={"flex flex-row gap-10 pb-4 align-center"}>
+          <h5 className={"text-white font-bold text-sm"}>Max: {Math.round(weatherDataCurrent.maxTemperature)}ºC</h5>
+          <h5 className={"text-white font-bold text-sm"}>Min: {Math.round(weatherDataCurrent.minTemperature)}ºC</h5>
         </div>
         <div className={"flex flex-row sm:gap-10 gap-2 pb-10"}>
           <div className={"flex flex-row items-center gap-2 bg-custom-purple-450/40 pt-1 pb-1 pl-3 pr-3 rounded "}>
@@ -153,7 +153,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
           </div>
         </div>
 
-        <div className={"flex flex-col bg-custom-purple-450/40 p-5 rounded-xl md:w-2/5 mb-10"}>
+        <div className={"flex flex-col bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  sm:w-9/12 mr-10 ml-10 mb-10"}>
           <h2 className={"text-white/70 font-bold text-2xl pb-5"}>Weather for tommorow</h2>
           <h2 className={"text-white/70 font-bold text-2xl pb-10"}>{Math.round(weatherForecastData[0].tempDay * 10) / 10}ºC</h2>
           <div className={"flex flex-row gap-10"}>
@@ -174,7 +174,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
           </div>
         </div>
 
-        <div className={"relative flex flex-row bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  sm:w-9/12 mr-10 ml-10 overflow-auto"}>
+        <div className={"relative flex flex-row bg-custom-purple-450/40 p-5 rounded-xl lg:w-2/5 md:w-3/5  w-9/12 mr-10 ml-10 overflow-auto"}>
 
         
           {weatherForecastData.slice(1,6).map(data => {

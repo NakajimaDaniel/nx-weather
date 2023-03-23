@@ -58,14 +58,14 @@ export default function SearchBar() {
       else{
         alert('this city does not exist')
       }
+      
     }
   }
 
   useEffect(() => {
-    if (loading === true) {
-      setLoading(false)
-    }
-  }, [loading])
+    setLoading(false)
+  }, [router])
+  
 
   return (
     <div className={" "}>
