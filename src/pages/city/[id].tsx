@@ -11,6 +11,7 @@ import SunCloud from '../../../public/assets/cloud-sun.png'
 import Rain from '../../../public/assets/rain.png'
 import Thunder from '../../../public/assets/thunder.png'
 import Mist from '../../../public/assets/mist.png'
+import SearchBar from '../../components/SearchBar';
 
 interface cityWeatherProps {
   weatherDataCurrent: {
@@ -119,6 +120,7 @@ export default function CityWeather({weatherForecastData,weatherDataCurrent }: c
     <main>
       
       <div className={"flex flex-col items-center h-full"} >
+      <SearchBar />
         <div className={"flex flex-row  pb-2 pt-6"}>
           <Icon icon="mdi:map-marker" className={"text-custom-purple-400 pt-1"} width="24px" />
           <h4 className={"text-white font-bold text-2xl"}>{weatherDataCurrent.city}, {weatherDataCurrent.country}</h4>

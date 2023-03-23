@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Combobox, Transition } from '@headlessui/react'
 import { useRouter } from "next/router"
 
@@ -53,6 +53,7 @@ export default function SearchBar() {
       if(selected.name == e.target.value) {
         setLoading(true);
         router.push(`/city/${selected.id}`);
+        
       }
       else{
         alert('this city does not exist')
@@ -60,6 +61,11 @@ export default function SearchBar() {
     }
   }
 
+  useEffect(() => {
+    if (loading === true) {
+      setLoading(false)
+    }
+  }, [loading])
 
   return (
     <div className={" "}>
