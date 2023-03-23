@@ -1,4 +1,4 @@
-# nx-weather
+# NX Weather
 
 <div align="center" >
 
