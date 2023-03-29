@@ -1,8 +1,9 @@
-/*
+
 import { render, screen } from "@testing-library/react"
 import CityWeather from "../../pages/city/[id]"
 import { useRouter } from 'next/dist/client/router';
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
+import '@testing-library/jest-dom'
 
 const weatherData = { 
   city: "Diadema",
@@ -15,6 +16,8 @@ const weatherData = {
   icon: "01d",
   country: "BR",
   timezone: -10800,
+  windSpeed: 10,
+  weatherStatus: "status",
 }
 
 const weatherForecastUnit = { 
@@ -34,49 +37,32 @@ const weatherForecastUnit = {
   PrecipitationProp: 151,
 }
 
-jest.mock('next/dist/client/router');
 
+
+jest.mock('next/router', () => require('next-router-mock'));
+jest.mock('../../../public/assets/cloud.png');
+jest.mock('../../../public/assets/mist.png');
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: (props: any) => {
+    return <img {...props} />
+  },
+}))
 
 describe("city weather page unit test", () => {
 
 
   it("should render city name correctly", () => {
 
-    const useRouterMocked = mocked(useRouter);
-
-    useRouterMocked.mockImplementation(() => ({
-      isFallback: false
-    })as any)
-
     render(<CityWeather weatherDataCurrent={weatherData} weatherForecastData={[weatherForecastUnit]}   /> )
 
-    expect(screen.getByText("Current weather in Diadema, BR")).toBeInTheDocument();
+    expect(screen.getByText("Diadema, BR")).toBeInTheDocument();
 
-
-  })
-
-
-  it("show today date", () => {
-
-    const useRouterMocked = mocked(useRouter);
-
-    useRouterMocked.mockImplementation(() => ({
-      isFallback: false
-    })as any)
-
-    render(<CityWeather weatherDataCurrent={weatherData} weatherForecastData={[weatherForecastUnit]}   /> )
-
-    expect(screen.getByText("09/08/21")).toBeInTheDocument();
 
   })
 
 
   it("should show rounded temperature value", () => {
-    const useRouterMocked = mocked(useRouter);
-
-    useRouterMocked.mockImplementation(() => ({
-      isFallback: false
-    })as any)
 
     render(<CityWeather weatherDataCurrent={weatherData} weatherForecastData={[weatherForecastUnit]}   /> )
 
@@ -84,4 +70,4 @@ describe("city weather page unit test", () => {
   })
 
 
-})*/
+})
