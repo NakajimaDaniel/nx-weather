@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 
 import MoonLoader from "react-spinners/ClipLoader";
 import { Icon } from "@iconify/react";
+import axios from "axios";
 
 
 type cityUnit = {
@@ -24,10 +25,9 @@ export default function SearchBar() {
   const router = useRouter();
 
   async function FetchCities(value) { 
-    const res = await fetch(`/api/city/${value}`)
-    const data = await res.json();
+    const res = await axios.get(`/api/city/${value}`)
 
-    const cities = data.map(value => {
+    const cities = res.data.map(value => {
       return {
         _id: value._id,
         id: value.id,
@@ -51,14 +51,17 @@ export default function SearchBar() {
 
   function handleSearchInputKeyPress(e) {
     if(e.key === 'Enter') {
-      if(selected.name == e.target.value) {
-        setLoading(true);
-        router.push(`/city/${selected.id}`);
-        
+      if (e.target.value) {
+        if(selected.name == e.target.value) {
+          setLoading(true);
+          router.push(`/city/${selected.id}`);
+          
+        }
+        else{
+          alert('this city does not exist')
+        }
       }
-      else{
-        alert('this city does not exist')
-      }
+
       
     }
   }
