@@ -20,3 +20,4 @@ Simple weather (current and forecast) web app.
  - NextJs
  - TailwindCSS
  - MongoDB
+ - Jest
