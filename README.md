@@ -13,6 +13,7 @@ Simple weather (current and forecast) web app.
 
  - Search city functionality
  - Current and forecast weather data from OpenWeather
+ - With unit test
  
 ## Technologies
 
